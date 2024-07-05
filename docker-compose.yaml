@@ -14,6 +14,15 @@ services:
       - REDIS_IP=redis
       - REDIS_SERVERS=['redis']
       - USE_SQLITE=0
+      - AWS_ACCESS_KEY_ID=9KBBQdvpcxEE3gIwHidt
+      - AWS_SECRET_ACCESS_KEY=i5moAt8uYLYKina1ysfiv2dS2vnH7et463Lh3ysf
+      - SHARED_AWS_ACCESS_ID=4p312FtMtqI22fWA2gvV
+      - SHARED_AWS_ACCESS_KEY=kcs3A9fD0LmkeaeAbuLyqIFbtoa2QfjVOZH8YJfp
+      - R2_TRANSIENT_ACCOUNT=http://minio:9000
+      - R2_PERMANENT_ACCOUNT=http://minio:9000
+      - R2_TRANSIENT_BUCKET=horde-transient
+      - R2_PERMANENT_BUCKET=horde-permanent
+      - R2_SOURCE_IMAGE_BUCKET=horde-source-image
     volumes:
       - .env_docker:/app/.env_docker # You can replace the local pre-built .env file with the container's file.
     networks:
@@ -60,6 +69,8 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
+    volumes:
+      - ../minio/data:/data
     command: server /data --console-address ":9001"
 
 networks:
